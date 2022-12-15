@@ -1,54 +1,29 @@
-const express = require('express');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser'); // auto parse json body
+const User = require('./Models/User.model')
+
+const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
 const PORT = 4040;
+const uri = "mongodb+srv://admin:admin@cluster0.0b4sc5v.mongodb.net/?retryWrites=true&w=majority";
 
+
+const apiRouter = require('./Routes')
+
+//connection database MongoDB
 app.use(bodyParser.json());
-
-
-app.get('/test', (req, res) => {
-    console.log('test requete a /test')
-    // res.send('Test: OK');
-    // res.send('<h1>Test: OK</h1>');
-    res.send({
-        message: 'Status: 200',
-        auth: false,
-        products: [
-            {
-                id:1,
-                name: 'product1'
-            },
-            {
-                id:2,
-                name: 'product2'
-            },
-        ]
-    })  
+mongoose.set('strictQuery', false)
+mongoose.connect(uri)
+.then(() => {
+    console.log("Successfully connected")
+})
+.catch((err) => {
+    console.log(err)
 })
 
-app.post('/api/v1/auth/login', (req, res) => {
-    console.log(req.body)
-    // console.log(JSON.parse(req.body))
-    if(!req.body.email || !req.body.password){
-        return res.status(404).send({
-            auth: false,
-            message: 'User not found'
-        })
-    }
-    res.send({
-        status: res.statusCode,
-        auth: true,
-        user: req.body
-    })
-})
-
-const MyUser ={
-    // JSON.stringify({
-    firstName: 'Thomas',
-    lastname: 'Jankowski'
-    // })
-}
+app.use('/api', apiRouter);
 
 
 app.listen(PORT, function () {
