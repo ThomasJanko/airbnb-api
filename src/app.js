@@ -1,16 +1,23 @@
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser'); // auto parse json body
 const User = require('./Models/User.model')
+const cors = require('cors');
 
 const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
+
 const PORT = 4040;
 const uri = "mongodb+srv://admin:admin@cluster0.0b4sc5v.mongodb.net/?retryWrites=true&w=majority";
 
 
 const apiRouter = require('./Routes')
+
+//allow acces from port != 4040
+app.use(cors({
+    origin: ['http://localhost:3000']
+  }));
 
 //connection database MongoDB
 app.use(bodyParser.json());
