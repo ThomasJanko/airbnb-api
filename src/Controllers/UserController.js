@@ -40,7 +40,7 @@ exports.Login = (req, res) => {
                             res.send({
                                     status: res.statusCode,
                                     auth: true,
-                                    user: req.body
+                                    user: user
                                 })
                         }
                         else{
