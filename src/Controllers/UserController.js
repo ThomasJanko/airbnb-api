@@ -23,22 +23,54 @@ exports.Test= (req, res) => {
 
 exports.Login = (req, res) => {
     console.log(req.body)
+    
     // console.log(JSON.parse(req.body))
-    if(!req.body.email || !req.body.password){
-        return res.status(404).send({
-            auth: false,
-            message: 'User not found'
+    if(req.body.email && req.body.password){
+
+        const email = req.body.email
+        const password = req.body.password
+
+       
+        User.findOne({email: email }, function(err, user) {
+            if(err){ return res.status(404)}
+            if(user){
+                bcrypt.compare(password,
+                    user.password, function(err, result) {
+                        if(result){
+                            res.send({
+                                    status: res.statusCode,
+                                    auth: true,
+                                    user: req.body
+                                })
+                        }
+                        else{
+                            res.status(404).send(err)
+                        }
+                    }
+                )
+            }
         })
+        // return res.status(404).send({
+        //     auth: false,
+        //     message: 'User not found'
+        // })
     }
-    res.send({
-        status: res.statusCode,
-        auth: true,
-        user: req.body
-    })
+    // res.send({
+    //     status: res.statusCode,
+    //     auth: true,
+    //     user: req.body
+    // })
 }
 
 //création utilisateur
 exports.Register =(req, res) => {
+
+    if(!req.body.email || !req.body.password || !req.body.firstName || !req.body.lastName){
+        return res.status(404).send({
+            auth: false,
+            message: 'Missing fields'
+        })
+    }
        const firstName= req.body.firstName
        const lastName= req.body.lastName
        const email= req.body.email
@@ -103,7 +135,9 @@ exports.GetOneUser = (req, res)=>{
 exports.GetUsers =(req, res)=>{
     User.find()
     .then((users)=>{
-        res.send(users)
+         res.send(users)
+        // res.status(200).json(users)
+
     })
     .catch((err)=>{
         res.status(500).send(err)
