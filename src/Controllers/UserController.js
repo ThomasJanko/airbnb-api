@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../Models/User.model')
+const jwt = require('jsonwebtoken');
 
 exports.Test= (req, res) => {
     console.log('test request url /test')
@@ -50,16 +51,9 @@ exports.Login = (req, res) => {
                 )
             }
         })
-        // return res.status(404).send({
-        //     auth: false,
-        //     message: 'User not found'
-        // })
+        
     }
-    // res.send({
-    //     status: res.statusCode,
-    //     auth: true,
-    //     user: req.body
-    // })
+    
 }
 
 //création utilisateur
@@ -86,7 +80,8 @@ exports.Register =(req, res) => {
             });
             newUser.save()
             .then((user)=>{
-                res.send(user);
+                var token = jwt.sign({id: user.id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);//Math.floor(Date.now() / 1000) + (60 * 60)
+                res.send({user, token});
             })
             .catch((err)=>{
                 res.status(404).send(err)
