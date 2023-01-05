@@ -37,19 +37,32 @@ exports.Login = (req, res) => {
             if(user){
                 bcrypt.compare(password,
                     user.password, function(err, result) {
-                        if(result){
-                            res.send({
-                                    status: res.statusCode,
-                                    auth: true,
-                                    user: user
-                                })
+                        if(!!result){
+                            console.log('hii')
+                            var token = jwt.sign({id: user.id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);//Math.floor(Date.now() / 1000) + (60 * 60)
+                            res.status(200).send(token);
+                            // res.send({
+                            //         status: res.statusCode,
+                            //         auth: true,
+                            //         user: user
+                            //     })
                         }
                         else{
+                            console.log('noo')
                             res.status(404).send(err)
                         }
                     }
                 )
+                // const passwordCompare = bcrypt.compareSync(password, user.password);
+                // if (passwordCompare) {
+                // const token = jwt.sign({ id: user.id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);
+                // res.send(token);
+                // } else {
+                // res.status(401).send('Unauthorized');
+                // }
+                
             }
+            else{res.status(404).send('Email or Password Incorrect')}
         })
         
     }
@@ -81,7 +94,8 @@ exports.Register =(req, res) => {
             newUser.save()
             .then((user)=>{
                 var token = jwt.sign({id: user.id, isAdmin: user.isAdmin }, process.env.JWT_SECRET);//Math.floor(Date.now() / 1000) + (60 * 60)
-                res.send({user, token});
+                res.send(token);
+                // res.send({user, token});
             })
             .catch((err)=>{
                 res.status(404).send(err)
@@ -118,6 +132,19 @@ exports.DeleteUser = (req, res)=>{
 //FindUserbyId
 exports.GetOneUser = (req, res)=>{
     User.findById(req.params.id)
+    // User.findById(req.userId)
+    .then((users)=>{
+        res.send(users)
+    })
+    .catch((err)=>{
+        res.status(500).send(err)
+    })
+}
+//GetAuthUser
+exports.GetAuthUser = (req, res)=>{
+    // User.findById(req.params.id)
+    console.log(req.userId)
+    User.findById(req.userId)
     .then((users)=>{
         res.send(users)
     })
