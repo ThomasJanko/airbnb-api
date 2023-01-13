@@ -86,4 +86,17 @@ exports.GetUsers =(req, res)=>{
     .catch((err)=>{
         res.status(500).send(err)
     })
+
+    //FindUserbyId
+// exports.GetUserByEmail = (req, res)=>{
+//     console.log(req)
+//     User.findOne(req)
+//     // User.findById(req.userId)
+//     .then((user)=>{
+//         res.send(user)
+//     })
+//     .catch((err)=>{
+//         res.status(500).send(err)
+//     })
+// }
 }

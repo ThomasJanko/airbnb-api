@@ -1,4 +1,11 @@
 const { body, check, validationResult } = require('express-validator');
+const User = require('../Models/User.model')
+
+
+
+function emailExists(email) {
+    return User.some(user => user.email === email);
+  }
 
 exports.checkEmail = [
     body('email').isEmail()
