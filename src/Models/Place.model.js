@@ -6,8 +6,6 @@ const placeSchema = mongoose.Schema({
     title:{
         type: String,
         required: true,
-        trim: true,
-        lowercase: true,
         minLength: 2,
         maxLength: 50,
     },
@@ -18,13 +16,10 @@ const placeSchema = mongoose.Schema({
         
     },
 
-    owner:{
-        // type: UserModel,
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-        required: true,
-
-    },
-
+    owner: { 
+        type: mongoose.Schema.Types.ObjectId, ref: UserModel, 
+        required: true
+     },
     pricePerDay:{
         type: Number,
         required: false,
