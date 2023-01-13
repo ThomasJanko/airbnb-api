@@ -10,9 +10,9 @@ router.get('/users', UserController.GetUsers)
 // router.get('/user/:id', UserController.GetOneUser)
 router.get('/user/:id', verifyToken, verifyIsAdmin, UserController.GetOneUser)
 router.get('/user/', verifyToken, UserController.GetAuthUser)
-router.put('/user/:id', UserController.EditUser)
-router.post('/auth/login', UserController.Login)
-router.post('/auth/register', UserController.Register)
+router.put('/user/:id',verifyIsAdmin, UserController.EditUser)
+// router.post('/auth/login', UserController.Login)
+// router.post('/auth/register', UserController.Register)
 router.delete('/users/:id', UserController.DeleteUser)
 
 

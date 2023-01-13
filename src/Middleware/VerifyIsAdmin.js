@@ -21,6 +21,15 @@ function verifyIsAdmin(req, res, next) {
         }
       });
 
+    // if(!req.userToken.isAdmin){
+    //     return res.status(403).send({
+    //         auth: false,
+    //         message: 'Only Admin can do this!'
+    //     })
+    // }
+    // next();
+    
+
     
 }
 
