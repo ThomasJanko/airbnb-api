@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const PlaceModel = require('./Place.model');
 
 const userSchema = mongoose.Schema({
     firstName:{
@@ -38,7 +39,18 @@ const userSchema = mongoose.Schema({
     isAdmin:{
         type: Boolean,
         default: false,
-    }
+    },
+    type: {
+        type: String,
+        enum: ["CUSTOMER", "OWNER"],
+        default: "CUSTOMER",
+    },
+    places: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref:"Place"
+        }
+      ]
 });
      
 

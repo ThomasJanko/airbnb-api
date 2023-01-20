@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const UserModel = require('./User.model');
+const User = require('./User.model');
 
 const placeSchema = mongoose.Schema({
 
@@ -17,7 +17,7 @@ const placeSchema = mongoose.Schema({
     },
 
     owner: { 
-        type: mongoose.Schema.Types.ObjectId, ref: UserModel, 
+        type: mongoose.Schema.Types.ObjectId, ref: 'User',
         required: true
      },
     pricePerDay:{
@@ -25,7 +25,7 @@ const placeSchema = mongoose.Schema({
         required: false,
     },
 
-    capcity:{
+    capacity:{
         type: Number,
         required: false,
     },

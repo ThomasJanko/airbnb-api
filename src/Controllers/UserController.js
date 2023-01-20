@@ -65,8 +65,8 @@ exports.GetOneUser = (req, res)=>{
 //GetAuthUser
 exports.GetAuthUser = (req, res)=>{
     // User.findById(req.params.id)
-    console.log(req.userId)
-    User.findById(req.userId)
+    // console.log(req.userId)
+    User.findById(req.userId).populate('places')
     .then((users)=>{
         res.send(users)
     })

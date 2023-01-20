@@ -4,46 +4,51 @@ const jwt = require('jsonwebtoken');
 
 
 //création utilisateur
-exports.AddPlace =(req, res) => {
+exports.AddPlace = async (req, res) => {
 
-    console.log(req.body)
-
-       const title= req.body.title
-       const type= req.body.type
-    //    const owner= req.body.owner
-       const pricePerDay = req.body.pricePerDay
-       const capcity = req.body.capcity
-       const description = req.body.description
-       const image = req.body.image
-    //    const Addresse = req.body.Addresse
-
+    try {
         const newPlace = new Place({
-            title: title,
-            type: type,
-            pricePerDay: pricePerDay,
-            capcity: capcity,
-            description: description,
-            image: image,
-       })
-    User.findById(req.body.owner)
-    .then((user) => {
-        newPlace.owner = user;
-        return newPlace.save();
-    })
-    .then(() => res.send({ message: "place created successfully" }))
-    .catch((err) => res.status(500).send(err));
-    //    newPlace.save()
-   
-    //    res.send(newPlace)
-    
-    
-
+            title: req.body.title,
+            type: req.body.type,
+            owner: req.userId,
+            pricePerDay: req.body.pricePerDay,
+            capacity: req.body.capacity,
+            description: req.body.description,
+            image: req.body.image,
+            Addresse: {
+                city: req.body.Addresse.city,
+                street: {
+                    zipCode: req.body.Addresse.street.zipCode,
+                    gps: {
+                        lat: req.body.Addresse.street.gps.lat,
+                        long: req.body.Addresse.street.gps.long
+                    }
+                }
+            }
+        });
+        const savedPlace = await newPlace.save();
+        const updatedUser = await User.findOneAndUpdate({_id: req.userId}, {$push: {places: savedPlace._id}}, {new: true}).exec();
+        console.log(updatedUser);
+        res.status(201).send(savedPlace);
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
 }
 
 exports.GetPlaces =(req, res)=>{
     Place.find().populate('owner')
     .then((places)=>{
          res.send(places)
+    })
+    .catch((err)=>{
+        res.status(500).send(err)
+    })
+}
+exports.GetMyPlaces =(req, res)=>{
+    // console.log(req.userId)
+    User.findById(req.userId).populate('places')
+    .then((user)=>{
+        res.send(user)
     })
     .catch((err)=>{
         res.status(500).send(err)
