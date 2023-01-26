@@ -6,5 +6,6 @@ const PlaceController = require('../Controllers/PlaceController')
 router.post('/place', verifyToken, PlaceController.AddPlace)
 router.get('/places', PlaceController.GetPlaces)
 router.get('/myplaces', PlaceController.GetMyPlaces)
+router.get('/place/:id', PlaceController.GetPlaceId)
 
 module.exports = router;

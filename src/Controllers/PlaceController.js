@@ -54,3 +54,12 @@ exports.GetMyPlaces =(req, res)=>{
         res.status(500).send(err)
     })
 }
+exports.GetPlaceId =(req, res)=>{
+    Place.findById(req.params.id)
+    .then((place)=>{
+        res.send(place)
+    })
+    .catch((err)=>{
+        res.status(500).send(err)
+    })
+}
