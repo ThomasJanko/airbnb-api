@@ -55,7 +55,7 @@ exports.GetMyPlaces =(req, res)=>{
     })
 }
 exports.GetPlaceId =(req, res)=>{
-    Place.findById(req.params.id)
+    Place.findById(req.params.id).populate('owner')
     .then((place)=>{
         res.send(place)
     })

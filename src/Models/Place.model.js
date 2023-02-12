@@ -11,7 +11,7 @@ const placeSchema = mongoose.Schema({
     },
 
     type:{
-        type: String,
+        type: Array,
         required: true,
         
     },
@@ -22,28 +22,28 @@ const placeSchema = mongoose.Schema({
      },
     pricePerDay:{
         type: Number,
-        required: false,
+        required: true,
     },
 
     capacity:{
         type: Number,
-        required: false,
+        required: true,
     },
 
     description: {
         type: String,
-        required: false,
+        required: true,
     },
     image: {
         type: String,
-        required: false,
+        required: true,
     },
 
     Addresse: {
         required: false,
         city: {
             type: String,
-            required: false,
+            required: true,
         },
         street: {
             required: false,
