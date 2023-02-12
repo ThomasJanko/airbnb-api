@@ -49,7 +49,7 @@ exports.Register =(req, res) => {
        const lastName= req.body.lastName
        const email= req.body.email
        const password = req.body.password
-
+//Hash password
     bcrypt.hash(password, 6)
     .then(hashedPassword => {
         const newUser = new User({
