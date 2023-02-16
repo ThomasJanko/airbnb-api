@@ -49,6 +49,7 @@ exports.Register =(req, res) => {
        const lastName= req.body.lastName
        const email= req.body.email
        const password = req.body.password
+       const avatar = req.body.avatar
 //Hash password
     bcrypt.hash(password, 6)
     .then(hashedPassword => {
@@ -56,7 +57,8 @@ exports.Register =(req, res) => {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                password: hashedPassword
+                password: hashedPassword,
+                avatar: avatar
             });
             newUser.save()
             .then((user)=>{

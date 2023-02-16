@@ -45,6 +45,11 @@ const userSchema = mongoose.Schema({
         enum: ["CUSTOMER", "OWNER"],
         default: "CUSTOMER",
     },
+    avatar: {
+        type: String,
+        required: false,
+
+    },
     places: [
         {
           type: mongoose.Schema.Types.ObjectId,

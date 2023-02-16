@@ -30,7 +30,64 @@ exports.EditUser =(req, res) =>{
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         isAdmin: req.body.isAdmin,
-        password: req.body.password
+        password: req.body.password,
+        avatar: req.body.avatar
+    }, {new: true}) //retourne User avec changements
+    .then((user)=>{
+        res.send(user);
+    })
+    .catch((err)=>{
+        res.status(404).send(err)
+    })
+}
+
+
+// exports.EditMe = async (req, res) => {
+//     const { firstName, lastName, isAdmin, currentPassword, newPassword, avatar } = req.body;
+//     const userId = req.userId;
+  
+//     // Find the user by ID
+//     let user = await User.findById(userId);
+  
+//     if (!user) {
+//       return res.status(404).send({ message: 'User not found' });
+//     }
+  
+//     // Check if the current password is correct
+//     const isCurrentPasswordValid = await bcrypt.compare(currentPassword, user.password);
+//     if (!isCurrentPasswordValid) {
+//       return res.status(400).send({ message: 'Current password is incorrect' });
+//     }
+  
+//     // If the new password is provided, hash it and update the user's document
+//     if (newPassword) {
+//       const salt = await bcrypt.genSalt(10);
+//       const hashedPassword = await bcrypt.hash(newPassword, salt);
+//       user.password = hashedPassword;
+//     }
+  
+//     // Update the other fields
+//     user.firstName = firstName;
+//     user.lastName = lastName;
+//     user.isAdmin = isAdmin;
+//     user.avatar = avatar;
+  
+//     try {
+//       const updatedUser = await user.save();
+//       res.send(updatedUser);
+//     } catch (err) {
+//       res.status(500).send({ message: err.message });
+//     }
+//   };
+
+//update User Auth
+exports.EditMe =(req, res) =>{
+    User.findByIdAndUpdate(req.userId, {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        isAdmin: req.body.isAdmin,
+        //password: req.body.password,
+        avatar: req.body.avatar
     }, {new: true}) //retourne User avec changements
     .then((user)=>{
         res.send(user);
