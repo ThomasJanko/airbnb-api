@@ -63,3 +63,23 @@ exports.GetPlaceId =(req, res)=>{
         res.status(500).send(err)
     })
 }
+exports.DeletePlace =(req, res)=>{
+    console.log(req.body);
+    if(req.body.owner == req.userId){
+        Place.findByIdAndDelete(req.body._id)
+        .then((place)=>{
+            res.status(200).json({
+                message: `Place with ID ${req.params.id} successfully deleted.`
+            });
+        })
+        .catch((err)=>{
+            res.status(500).send(err)
+        })
+    }
+    else{
+        return res.status(403).json({
+            error: 'You are not authorized to delete this place.'
+          });
+    }
+   
+}
