@@ -134,7 +134,7 @@ exports.GetAuthUser = (req, res)=>{
 
 //findAllUsers
 exports.GetUsers =(req, res)=>{
-    User.find()
+    User.find().populate('places')
     .then((users)=>{
          res.send(users)
         // res.status(200).json(users)
