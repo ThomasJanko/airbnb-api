@@ -6,7 +6,7 @@ const verifyIsAdmin = require('../Middleware/VerifyisAdmin');
 
 router.get('/test', UserController.Test)
 
-router.get('/users', UserController.GetUsers)
+router.get('/users', verifyToken, verifyIsAdmin, UserController.GetUsers)
 // router.get('/user/:id', UserController.GetOneUser)
 router.get('/user/:id', verifyToken, verifyIsAdmin, UserController.GetOneUser)
 router.get('/user/', verifyToken, UserController.GetAuthUser)
