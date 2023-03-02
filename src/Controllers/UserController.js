@@ -123,7 +123,7 @@ exports.GetOneUser = (req, res)=>{
 exports.GetAuthUser = (req, res)=>{
     // User.findById(req.params.id)
     // console.log(req.userId)
-    User.findById(req.userId).populate('places')
+    User.findById(req.userId).populate('places').populate({path: 'reservations', populate: {path: 'owner'}})
     .then((users)=>{
         res.send(users)
     })
