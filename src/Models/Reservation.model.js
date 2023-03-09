@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = require('./User.model');
 const Place = require('./Place.model');
 
-const placeSchema = mongoose.Schema({
+const reservationSchema = mongoose.Schema({
 
     title:{
         type: String,
@@ -38,4 +38,4 @@ const placeSchema = mongoose.Schema({
 });
      
 
-module.exports = mongoose.model('Place', placeSchema)
+module.exports = mongoose.model('Reservation', reservationSchema)

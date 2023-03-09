@@ -18,20 +18,30 @@ exports.AddReservation =async (req, res) =>{
         // Create reservation object
         const reservation = new Reservation({
           title,
-          place: place._id,
-          owner: owner._id,
+          place: place,
+          owner: owner,
           nbOfNights,
           totalPrice,
           dates,
         });
     
         // Save reservation to database
-        await reservation.save();
-    
+        const savedReservation = await reservation.save();
+        const updatedUser = await UserModel.findOneAndUpdate({_id: req.userId}, {$push: {reservations: savedReservation._id}}, {new: true}).exec();
+        console.log(updatedUser)
         res.status(201).json({ reservation });
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server Error' });
       }
     
+}
+
+exports.getReservations = async (req, res) => {
+  try {
+    const reservations = await Reservation.find().populate('owner');
+    res.status(200).json(reservations);
+  } catch (error) {
+    res.status(500).json({ error: 'Server Error' });
+  }
 }

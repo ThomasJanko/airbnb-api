@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const PlaceModel = require('./Place.model');
+const ReservationModel = require('./Reservation.model');
 
 const userSchema = mongoose.Schema({
     firstName:{
@@ -33,8 +34,7 @@ const userSchema = mongoose.Schema({
         minLength: 4,
         maxLength: 100,
     },
-    // hash: String,
-    // salt: String,
+  
 
     isAdmin:{
         type: Boolean,
@@ -55,6 +55,12 @@ const userSchema = mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref:"Place"
         }
+      ],
+      reservations: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Reservation"
+    }
       ]
 });
      
