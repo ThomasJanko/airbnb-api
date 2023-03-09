@@ -16,7 +16,7 @@ const apiRouter = require('./Routes')
 
 //allow acces from port != 4040
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:4040', 'http://localhost:3024']
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:4040', 'http://localhost:3024', 'https://airbnb-clone-4wtmgkd2o-thomasjanko.vercel.app']
   }));
 
 //connection database MongoDB
