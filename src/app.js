@@ -14,6 +14,7 @@ const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWOR
 
 const apiRouter = require('./Routes')
 
+
 //allow acces from port != 4040
 app.use(cors({
     origin: ['*']
