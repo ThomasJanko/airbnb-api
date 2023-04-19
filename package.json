@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\"",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "build": "npm install && npm run test && mkdir dist && copy package.json dist\\ && copy .env dist\\"
+    "build": "npm install && npm run test && mkdir dist && cp package.json dist/ && cp .env dist/"
   },
   "author": "",
   "license": "ISC",
