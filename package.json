@@ -5,9 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "start": "nodemon src/app.js",
-    "dev": "nodemon src/app.js",
-    "build": "echo 'Build complete'"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
