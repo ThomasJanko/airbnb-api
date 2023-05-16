@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser'); // auto parse json body
-const User = require('./Models/User.model')
 const cors = require('cors');
 require('dotenv').config() //accés aux variables d'environnement
 
@@ -12,7 +11,7 @@ const app = express();
 // const PORT = process.env.PORT;
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.mongodb.net/?retryWrites=true&w=majority`;
 
-const apiRouter = require('./Routes')
+const apiRouter = require('./src/Routes')
 
 
 //allow acces from port != 4040
