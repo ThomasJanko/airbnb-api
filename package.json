@@ -5,9 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "start": "node src/app.js",
+    "start": "node coucou src/app.js",
     "dev": "nodemon src/app.js",
-    "build": "node src/app.js"
+    "build": "node coucou src/app.js"
   },
   "author": "",
   "license": "ISC",
