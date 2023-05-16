@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const UserController = require('../Controllers/UserController')
 const verifyToken = require('../Middleware/VerifyToken')
-const verifyIsAdmin = require('../Middleware/VerifyisAdmin');
+const verifyIsAdmin = require('../Middleware/VerifyIsAdmin');
 
 router.get('/test', UserController.Test)
 
