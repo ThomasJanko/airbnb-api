@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 // const PORT = process.env.PORT;
-const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.mongodb.net/?retryWrites=true&w=majority`;
+const uri = process.env.MONGO_URL;;
 
 const apiRouter = require('./src/Routes')
 
