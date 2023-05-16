@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\"",
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
-    "build": "node src/app.js"
+    "build": "node src/app.js && exit 1"
   },
   "author": "",
   "license": "ISC",
