@@ -15,9 +15,10 @@ const apiRouter = require('./src/Routes')
 
 
 //allow acces from port != 4040
-app.use(cors({
-    origin: ['*']
-  }));
+app.use(cors())
+// app.use(cors({
+//     origin: ['*']
+//   }));
 
 //connection database MongoDB
 app.use(bodyParser.json());
