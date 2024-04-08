@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser'); // auto parse json body
 const cors = require('cors');
 require('dotenv').config() //accés aux variables d'environnement
@@ -9,16 +8,16 @@ const mongoose = require('mongoose');
 const app = express();
 
 // const PORT = process.env.PORT;
-const uri = process.env.MONGO_URL;;
+const uri = process.env.MONGO_URL;
 
 const apiRouter = require('./src/Routes')
 
 
 //allow acces from port != 4040
 app.use(cors())
-// app.use(cors({
-//     origin: ['*']
-//   }));
+app.use(cors({
+    origin: ['http://airbnb.thomas-jan.fr', 'https://airbnb.thomas-jan.fr']
+}))
 
 //connection database MongoDB
 app.use(bodyParser.json());
