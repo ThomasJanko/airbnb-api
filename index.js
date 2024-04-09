@@ -13,10 +13,9 @@ const uri = process.env.MONGO_URL;
 const apiRouter = require('./src/Routes')
 
 
-//allow acces from port != 4040
-app.use(cors())
 app.use(cors({
-    origin: ['http://airbnb.thomas-jan.fr', 'https://airbnb.thomas-jan.fr']
+    origin: ['http://airbnb.thomas-jan.fr', 'https://airbnb.thomas-jan.fr'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }))
 
 //connection database MongoDB
