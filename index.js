@@ -21,6 +21,8 @@ app.use(cors({
 
 //connection database MongoDB
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 mongoose.set('strictQuery', false)
 mongoose.connect(uri)
 .then(() => {
