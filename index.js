@@ -16,6 +16,7 @@ const apiRouter = require('./src/Routes')
 app.use(cors({
     origin: ['http://airbnb.thomas-jan.fr', 'https://airbnb.thomas-jan.fr'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }))
 
 //connection database MongoDB
