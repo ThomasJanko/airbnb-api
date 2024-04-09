@@ -31,6 +31,9 @@ mongoose.connect(uri)
 })
 
 app.use('/api', apiRouter);
+app.get('/', (req, res) => {
+    res.send('Airbnb API running !')
+})
 
 
 app.listen(process.env.PORT, function () {
